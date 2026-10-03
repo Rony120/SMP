@@ -4,10 +4,10 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <title>BLOCKTAG SMP</title>
-<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Pixelify+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{--bg:#0a0c0d;--panel:#1a1f21;--line:#2c3336;--txt:#ecebe4;--mute:#9aa3a6;--em:#2ee58a;--cy:#22e4ff;--or:#ff8a2b;--red:#ff4d4d;--yl:#ffd23f;
---tag:'Permanent Marker',Impact,sans-serif;--ui:'Bricolage Grotesque',system-ui,sans-serif;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+--tag:'Pixelify Sans','Press Start 2P',monospace,sans-serif;--ui:'Pixelify Sans',monospace,sans-serif;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
 *,*:before,*:after{box-sizing:inherit}
 html{scroll-behavior:smooth}
 body{margin:0;background:var(--bg);color:var(--txt);font:400 16px/1.6 var(--ui)}
@@ -98,7 +98,6 @@ dialog{background:var(--panel);color:var(--txt);border:3px solid var(--em);borde
 <div class="ctas">
 <button class="btn" id="join"><span>JOIN SMP</span><span>➜</span></button>
 <a class="btn ghost" id="discord" href="#" target="_blank" rel="noopener"><span>DISCORD</span></a>
-<button class="ip" id="ip" aria-label="Copy server IP"><span class="ipt"></span><span>⧉</span></button>
 </div>
 <div class="live"><i class="dot" id="dot"></i><b id="stl" style="font-weight:400">CHECKING SERVER…</b> <span id="pl"></span></div>
 </div>
@@ -125,23 +124,23 @@ dialog{background:var(--panel);color:var(--txt);border:3px solid var(--em);borde
 
 <script>
 /* ===== EDIT THESE ===== */
-const CONFIG={name:"BLOCKTAG",host:"ind1.softhost.in",port:19147,ip:"ind1.softhost.in:19147",version:"1.21.x",region:"India / Asia",discord:"https://discord.gg/yourinvite",
+const CONFIG={name:"BLOCKTAG",host:"ind1.softhost.in",port:19147,ip:"ind1.softhost.in:19147",version:"1.21.x",region:"India / Asia",discord:"https://discord.gg/SamfwgR49q",
 players:"124 / 500",
 about:"BLOCKTAG is a survival SMP where players build, trade and explore together. Claim your land, run a shop, join events and leave your tag on the world.",
-team:[["Alex","OWNER","Server founder and lead builder.",true,"--yl","-2deg"],["Nova","ADMIN","Keeps plugins and the economy balanced.",true,"--red","1.5deg"],["Riku","MODERATOR","Handles reports and keeps chat friendly.",false,"--cy","-1deg"],["Mia","HELPER","First stop for new players.",true,"--em","2deg"]]};
+team:[["oAnoy","OWNER","Server founder and lead builder.",true,"--yl","-2deg"],["Rony","ADMIN","Keeps plugins and the economy balanced.",true,"--red","1.5deg"],["Shergill","MODERATOR","Handles reports and keeps chat friendly.",true,"--cy","-1deg"],["Bustling","HELPER","First stop for new players.",true,"--em","2deg"]]};
 const $=s=>document.querySelector(s);
 $('#name').textContent=CONFIG.name;document.title=CONFIG.name+' SMP';
 document.querySelectorAll('.ipt').forEach(e=>e.textContent=CONFIG.ip);
 
 $('#about').textContent=CONFIG.about;
 $('#discord').href=CONFIG.discord;
-$('#facts').innerHTML=[["IP",CONFIG.ip],["VERSION",CONFIG.version],["REGION",CONFIG.region],["MODE","Survival SMP"]].map(([k,v])=>`<div class="fact"><b>${k}</b>${v}</div>`).join('');
-$('#team').innerHTML=CONFIG.team.map(([n,r,d,on,c,rot])=>`<div class="card" style="--c:var(${c});--r:${rot}"><span class="tg">${n.toUpperCase()}</span><div class="av">${n[0]}</div><h3>${n}</h3><span class="role">${r}</span><p>${d}</p><span class="pres"><i class="${on?'':'off'}"></i>${on?'Online':'Offline'}</span></div>`).join('');
+$('#facts').innerHTML=[["VERSION",CONFIG.version],["REGION",CONFIG.region],["MODE","Survival SMP"]].map(([k,v])=>`<div class="fact"><b>${k}</b>${v}</div>`).join('');
+$('#team').innerHTML=CONFIG.team.map(([n,r,d,on,c,rot])=>`<div class="card" style="--c:var(${c});--r:${rot}"><span class="tg">${n.toUpperCase()}</span><div class="av">${n[0].toUpperCase()}</div><h3>${n}</h3><span class="role">TEAM</span></div>`).join('');
 $('#foot').textContent=`© 2026 ${CONFIG.name}. All rights reserved.`;
 const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),2200)};
-function copyIP(){const ok=()=>{toast('✓ Server IP copied!');const b=$('#ip');b.classList.remove('pop');void b.offsetWidth;b.classList.add('pop')};
+function copyIP(){const ok=()=>{toast('✓ Server IP copied!');};
 (navigator.clipboard?navigator.clipboard.writeText(CONFIG.ip):Promise.reject()).then(ok,()=>{const t=document.createElement('textarea');t.value=CONFIG.ip;document.body.append(t);t.select();try{document.execCommand('copy');ok()}catch(e){toast('IP: '+CONFIG.ip)}t.remove()})}
-$('#ip').onclick=copyIP;$('#cp2').onclick=copyIP;$('#cl').onclick=()=>$('#dlg').close();
+$('#cp2').onclick=copyIP;$('#cl').onclick=()=>$('#dlg').close();
 $('#join').onclick=()=>{location.href=`minecraft://?addExternalServer=${encodeURIComponent(CONFIG.name)}|${CONFIG.ip}`;setTimeout(()=>{try{$('#dlg').showModal()}catch(e){toast('Server IP: '+CONFIG.ip)}},900)};
 
 
