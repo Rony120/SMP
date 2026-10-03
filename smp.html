@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>BLOCKTAG SMP</title>
+<link href="https://fonts.googleapis.com/css2?family=Permanent+Marker&family=Bricolage+Grotesque:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#0a0c0d;--panel:#1a1f21;--line:#2c3336;--txt:#ecebe4;--mute:#9aa3a6;--em:#2ee58a;--cy:#22e4ff;--or:#ff8a2b;--red:#ff4d4d;--yl:#ffd23f;
+--tag:'Permanent Marker',Impact,sans-serif;--ui:'Bricolage Grotesque',system-ui,sans-serif;color-scheme:dark;box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+*,*:before,*:after{box-sizing:inherit}
+html{scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--txt);font:400 16px/1.6 var(--ui)}
+.wrap{max-width:1040px;margin:0 auto;padding:0 20px}
+/* hero */
+.hero{min-height:100vh;display:flex;align-items:center;position:relative;overflow:hidden;padding:70px 0 90px;background:radial-gradient(ellipse at 78% 20%,#22e4ff33,transparent 45%),radial-gradient(ellipse at 12% 85%,#2ee58a2a,transparent 45%),linear-gradient(#14202a,#0b1013 60%,#0a0c0d)}
+.skyline{position:absolute;left:0;right:0;bottom:0;height:38%;background:repeating-linear-gradient(90deg,#161d20 0 70px,#1b2327 70px 140px,#12181a 140px 190px);clip-path:polygon(0 30%,6% 30%,6% 10%,14% 10%,14% 38%,22% 38%,22% 0,31% 0,31% 24%,40% 24%,40% 44%,50% 44%,50% 14%,60% 14%,60% 34%,70% 34%,70% 6%,80% 6%,80% 28%,90% 28%,90% 16%,100% 16%,100% 100%,0 100%)}
+.wall{position:absolute;inset:auto 0 0 0;height:20%;background:repeating-linear-gradient(0deg,#ffffff06 0 3px,transparent 3px 44px),repeating-linear-gradient(90deg,#00000040 0 3px,transparent 3px 88px),#1c2225;border-top:6px solid #0c0f10}
+.bgtag{position:absolute;font:400 clamp(60px,13vw,180px) var(--tag);opacity:.08;pointer-events:none;white-space:nowrap}
+.t1{right:-2%;top:12%;color:var(--cy);transform:rotate(-8deg)}.t2{left:-3%;bottom:14%;color:var(--or);transform:rotate(5deg)}
+.hero .wrap{position:relative;z-index:2}
+.title{font:400 clamp(58px,13vw,160px)/.88 var(--tag);margin:0;color:#f4f2e8;transform:rotate(-2.5deg);-webkit-text-stroke:3px #04100a;paint-order:stroke fill;text-shadow:4px 4px 0 #04100a,0 0 30px #2ee58a55}
+.title small{display:block;font-size:.34em;color:var(--cy);margin-top:10px;-webkit-text-stroke:2px #04100a;text-shadow:3px 3px 0 #04100a,0 0 20px var(--cy);letter-spacing:.18em}
+.drips{display:flex;gap:18px;margin:4px 0 0 8px}.drips i{width:8px;background:var(--em);border-radius:0 0 8px 8px;box-shadow:0 0 10px var(--em)}
+.tagline{font:600 clamp(18px,3vw,26px) var(--ui);margin:32px 0 28px}
+.ctas{display:flex;flex-wrap:wrap;gap:20px;align-items:center}
+.btn{display:inline-flex;align-items:center;gap:10px;font:400 19px var(--tag);letter-spacing:.04em;color:#04100a;background:var(--em);border:3px solid #04100a;padding:12px 26px;cursor:pointer;border-radius:6px 14px 8px 16px;box-shadow:4px 4px 0 var(--cy),0 0 22px #2ee58a55;position:relative;overflow:hidden;transition:transform .25s,box-shadow .25s;min-height:48px;text-decoration:none}
+.btn:before{content:"";position:absolute;left:50%;top:50%;width:0;height:0;background:var(--yl);border-radius:50%;transform:translate(-50%,-50%);transition:.4s}
+.btn>*{position:relative}
+.btn:hover{transform:rotate(-2deg) scale(1.04);box-shadow:6px 6px 0 var(--cy),0 0 34px #2ee58a99}
+.btn:hover:before{width:340px;height:340px}
+.btn.ghost{background:transparent;color:var(--txt);border-color:var(--txt);box-shadow:4px 4px 0 var(--or)}
+.btn.ghost:before{background:var(--or)}.btn.ghost:hover{color:#111}
+.ip{display:inline-flex;align-items:center;gap:12px;background:#0d1112cc;border:2px dashed var(--line);border-radius:10px;padding:10px 14px;color:var(--txt);font:600 15px var(--ui);cursor:pointer;min-height:48px;transition:.2s}
+.ip:hover{border-color:var(--em);box-shadow:0 0 18px #2ee58a44}.ip.pop{animation:pop .4s}
+@keyframes pop{50%{transform:scale(1.07) rotate(-1deg)}}
+.live{display:inline-flex;align-items:center;gap:10px;margin-top:26px;font:400 17px var(--tag);color:var(--em)}
+.dot{width:12px;height:12px;border-radius:50%;background:var(--em);box-shadow:0 0 12px var(--em);animation:pulse 1.8s infinite}
+@keyframes pulse{0%{box-shadow:0 0 0 0 #2ee58a99}100%{box-shadow:0 0 0 14px #2ee58a00}}
+.live span{color:var(--mute);font:600 15px var(--ui)}
+/* sections */
+section{padding:84px 0}
+h2{font:400 clamp(32px,5vw,48px)/1.05 var(--tag);margin:0 0 8px;display:inline-block;transform:rotate(-1deg);position:relative}
+h2:after{content:"";display:block;height:9px;margin-top:6px;background:var(--c,var(--em));clip-path:polygon(0 30%,35% 0,60% 50%,100% 20%,96% 85%,50% 100%,0 70%);filter:drop-shadow(0 0 6px var(--c,var(--em)))}
+.sub{color:var(--mute);margin:0 0 36px}
+.info{background:repeating-linear-gradient(90deg,#ffffff04 0 2px,transparent 2px 120px),#131719}
+.info p{max-width:640px;font-size:18px;margin:0 0 14px}
+.facts{display:flex;flex-wrap:wrap;gap:12px;margin-top:26px}
+.fact{border:2px solid var(--line);background:var(--panel);border-radius:6px 14px 8px 12px;padding:10px 18px}
+.fact b{display:block;font:400 12px var(--tag);color:var(--yl);transform:rotate(-2deg);transform-origin:left}
+.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+.card{text-align:center;padding:22px 18px 20px;background:linear-gradient(#1d2326,#14191b);border:3px solid var(--c);border-radius:4px;transform:rotate(var(--r,0deg));position:relative;transition:transform .25s,box-shadow .25s}
+.card:hover{transform:rotate(0) translateY(-6px);box-shadow:0 14px 30px #0008,0 0 24px color-mix(in srgb,var(--c) 35%,transparent)}
+.tg{position:absolute;left:8px;top:6px;font:400 26px var(--tag);color:var(--c);opacity:.2;transform:rotate(-12deg)}
+.av{width:100px;height:100px;margin:6px auto 12px;display:grid;place-items:center;font:400 42px var(--tag);color:#04100a;background-color:var(--c);border:3px solid #04100a;box-shadow:5px 5px 0 #000;background-image:linear-gradient(45deg,#ffffff22 25%,transparent 25% 75%,#ffffff22 75%),linear-gradient(45deg,#ffffff22 25%,transparent 25% 75%,#ffffff22 75%);background-size:25px 25px;background-position:0 0,12px 12px}
+.card h3{font:400 24px var(--tag);margin:0}
+.role{display:inline-block;font:400 13px var(--tag);background:var(--c);color:#111;padding:2px 12px;transform:rotate(-2deg);margin:6px 0 8px}
+.card p{font-size:14px;margin:0 0 10px;color:var(--mute)}
+.pres{font-size:13px;font-weight:600;display:inline-flex;align-items:center;gap:6px}.pres i{width:9px;height:9px;border-radius:50%;background:var(--em);box-shadow:0 0 8px var(--em)}.pres i.off{background:#667;box-shadow:none}
+footer{padding:36px 0;border-top:6px solid #000;background:#07090a;color:var(--mute);font-size:14px}
+#toast{position:fixed;left:50%;bottom:calc(26px + env(safe-area-inset-bottom,0px));transform:translate(-50%,120px);background:var(--em);color:#04100a;font:400 17px var(--tag);padding:12px 22px;border:3px solid #04100a;border-radius:6px 14px 8px 14px;box-shadow:4px 4px 0 var(--cy);transition:.35s;z-index:9;max-width:90vw}
+#toast.show{transform:translate(-50%,0)}
+dialog{background:var(--panel);color:var(--txt);border:3px solid var(--em);border-radius:14px;max-width:440px;padding:28px}dialog::backdrop{background:#000a}
+:focus-visible{outline:3px solid var(--cy);outline-offset:3px}
+/* realistic minecraft art */
+.skyline,.wall{display:none}.bgtag{opacity:.05}
+#scene{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;image-rendering:pixelated}
+.hero:after{content:"";position:absolute;inset:0;z-index:1;background:linear-gradient(90deg,#0a0c0dd9 0%,#0a0c0d80 45%,transparent 80%),linear-gradient(transparent 75%,var(--bg))}
+.cubes,.st{position:absolute;inset:0;pointer-events:none;perspective:900px}
+.cubes{z-index:1}.st{z-index:1;opacity:.95}
+.cube{position:absolute;width:var(--s);height:var(--s);transform-style:preserve-3d;filter:drop-shadow(0 18px 18px #000a)}
+.f{position:absolute;inset:0;background-size:100% 100%;image-rendering:pixelated}
+.f1{transform:translateZ(calc(var(--s)/2))}.f2{transform:rotateY(90deg) translateZ(calc(var(--s)/2));filter:brightness(.8)}
+.f3{transform:rotateY(180deg) translateZ(calc(var(--s)/2));filter:brightness(.65)}.f4{transform:rotateY(-90deg) translateZ(calc(var(--s)/2));filter:brightness(.8)}
+.f5{transform:rotateX(90deg) translateZ(calc(var(--s)/2))}.f6{transform:rotateX(-90deg) translateZ(calc(var(--s)/2));filter:brightness(.5)}
+.f:after{content:"";position:absolute;inset:0;background:linear-gradient(115deg,transparent 38%,rgba(255,255,255,.6) 50%,transparent 62%);background-size:260% 100%;background-position:160% 0;animation:shine 3.8s ease-in-out infinite;animation-delay:var(--d,0s);pointer-events:none}
+@keyframes shine{0%{background-position:160% 0}55%,100%{background-position:-60% 0}}
+.c2{--d:1.2s}.c3{--d:2.4s}.c5{--d:.8s}
+.c1{--s:clamp(110px,19vw,230px);right:13%;top:30%}.c2{--s:clamp(60px,9vw,110px);right:36%;top:62%}.c3{--s:clamp(50px,7vw,86px);right:6%;top:14%}
+.c4{--s:clamp(70px,11vw,130px);right:9%;top:22%}.c5{--s:clamp(70px,11vw,130px);right:9%;top:16%}
+.info,.tsec{position:relative;overflow:hidden}.info .wrap,.tsec .wrap{position:relative;z-index:2}
+@media(max-width:700px){.c2,.c3{display:none}.c1{right:2%;top:60%;opacity:.55}.st{opacity:.3}.hero:after{background:linear-gradient(#0a0c0dcc,#0a0c0d99 60%,var(--bg))}}
+@media(max-width:900px){.grid{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.grid{grid-template-columns:1fr}.ctas .btn,.ctas .ip{width:100%;justify-content:center}section{padding:60px 0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}}
+</style>
+</head>
+<body>
+<header class="hero">
+<div class="skyline"></div><div class="wall"></div>
+<div class="bgtag t1">SURVIVE</div><div class="bgtag t2">BUILD</div>
+<canvas id="scene" aria-hidden="true"></canvas>
+<div class="cubes" id="cubes" aria-hidden="true"></div>
+<div class="wrap">
+<h1 class="title"><span id="name"></span><small>SMP</small></h1>
+<div class="drips"><i style="height:26px"></i><i style="height:48px"></i><i style="height:18px"></i><i style="height:34px"></i></div>
+<p class="tagline">Survive. Build. Explore. Conquer.</p>
+<div class="ctas">
+<button class="btn" id="join"><span>JOIN SMP</span><span>➜</span></button>
+<a class="btn ghost" id="discord" href="#" target="_blank" rel="noopener"><span>DISCORD</span></a>
+<button class="ip" id="ip" aria-label="Copy server IP"><span class="ipt"></span><span>⧉</span></button>
+</div>
+<div class="live"><i class="dot" id="dot"></i><b id="stl" style="font-weight:400">CHECKING SERVER…</b> <span id="pl"></span></div>
+</div>
+</header>
+
+<section class="info"><div class="st" id="st1" aria-hidden="true"></div><div class="wrap">
+<h2 style="--c:var(--cy)">ABOUT THE SERVER</h2><p class="sub">Survival multiplayer, built around community.</p>
+<p id="about"></p>
+<div class="facts" id="facts"></div>
+</div></section>
+
+<section class="tsec"><div class="st" id="st2" aria-hidden="true"></div><div class="wrap">
+<h2 style="--c:var(--yl)">MEET THE TEAM</h2><p class="sub">The people keeping the world fair, fun and online.</p>
+<div class="grid" id="team"></div>
+</div></section>
+
+<footer><div class="wrap"><span id="foot"></span></div></footer>
+
+<dialog id="dlg"><h3 style="font:400 26px var(--tag);margin:0 0 8px;color:var(--em)">Join the SMP</h3>
+<p>If Minecraft didn't open, add the server manually:</p>
+<p>Multiplayer → Add Server → paste <b class="ipt"></b></p>
+<p><button class="btn" id="cp2" style="font-size:15px;padding:8px 16px;min-height:40px"><span>COPY IP</span></button> <button class="btn ghost" id="cl" style="font-size:15px;padding:8px 16px;min-height:40px"><span>CLOSE</span></button></p></dialog>
+<div id="toast" role="status" aria-live="polite"></div>
+
+<script>
+/* ===== EDIT THESE ===== */
+const CONFIG={name:"BLOCKTAG",host:"ind1.softhost.in",port:19147,ip:"ind1.softhost.in:19147",version:"1.21.x",region:"India / Asia",discord:"https://discord.gg/yourinvite",
+players:"124 / 500",
+about:"BLOCKTAG is a survival SMP where players build, trade and explore together. Claim your land, run a shop, join events and leave your tag on the world.",
+team:[["Alex","OWNER","Server founder and lead builder.",true,"--yl","-2deg"],["Nova","ADMIN","Keeps plugins and the economy balanced.",true,"--red","1.5deg"],["Riku","MODERATOR","Handles reports and keeps chat friendly.",false,"--cy","-1deg"],["Mia","HELPER","First stop for new players.",true,"--em","2deg"]]};
+const $=s=>document.querySelector(s);
+$('#name').textContent=CONFIG.name;document.title=CONFIG.name+' SMP';
+document.querySelectorAll('.ipt').forEach(e=>e.textContent=CONFIG.ip);
+
+$('#about').textContent=CONFIG.about;
+$('#discord').href=CONFIG.discord;
+$('#facts').innerHTML=[["IP",CONFIG.ip],["VERSION",CONFIG.version],["REGION",CONFIG.region],["MODE","Survival SMP"]].map(([k,v])=>`<div class="fact"><b>${k}</b>${v}</div>`).join('');
+$('#team').innerHTML=CONFIG.team.map(([n,r,d,on,c,rot])=>`<div class="card" style="--c:var(${c});--r:${rot}"><span class="tg">${n.toUpperCase()}</span><div class="av">${n[0]}</div><h3>${n}</h3><span class="role">${r}</span><p>${d}</p><span class="pres"><i class="${on?'':'off'}"></i>${on?'Online':'Offline'}</span></div>`).join('');
+$('#foot').textContent=`© 2026 ${CONFIG.name}. All rights reserved.`;
+const toast=m=>{const t=$('#toast');t.textContent=m;t.classList.add('show');clearTimeout(toast.t);toast.t=setTimeout(()=>t.classList.remove('show'),2200)};
+function copyIP(){const ok=()=>{toast('✓ Server IP copied!');const b=$('#ip');b.classList.remove('pop');void b.offsetWidth;b.classList.add('pop')};
+(navigator.clipboard?navigator.clipboard.writeText(CONFIG.ip):Promise.reject()).then(ok,()=>{const t=document.createElement('textarea');t.value=CONFIG.ip;document.body.append(t);t.select();try{document.execCommand('copy');ok()}catch(e){toast('IP: '+CONFIG.ip)}t.remove()})}
+$('#ip').onclick=copyIP;$('#cp2').onclick=copyIP;$('#cl').onclick=()=>$('#dlg').close();
+$('#join').onclick=()=>{location.href=`minecraft://?addExternalServer=${encodeURIComponent(CONFIG.name)}|${CONFIG.ip}`;setTimeout(()=>{try{$('#dlg').showModal()}catch(e){toast('Server IP: '+CONFIG.ip)}},900)};
+
+
+/* ===== live server status (Java). For Bedrock use /bedrock/3/ in the URL ===== */
+async function loadStatus(){
+  const dot=$('#dot'),lab=$('#stl'),pl=$('#pl');
+  try{
+    const r=await fetch('https://api.mcsrvstat.us/3/'+CONFIG.ip,{cache:'no-store'});
+    const d=await r.json();
+    if(!d.online){dot.style.cssText='background:#ff4d4d;box-shadow:none;animation:none';lab.textContent='SERVER OFFLINE';lab.style.color='#ff4d4d';pl.textContent='';return}
+    const on=d.players?d.players.online:0,max=d.players?d.players.max:0;
+    dot.style.cssText='';lab.textContent='SERVER ONLINE';lab.style.color='';
+    pl.textContent=`· ${on} / ${max} players · ${Math.max(max-on,0)} slots open`;
+  }catch(e){dot.style.cssText='background:#667;box-shadow:none;animation:none';lab.textContent='STATUS UNAVAILABLE';lab.style.color='#9aa3a6';pl.textContent=''}
+}
+loadStatus();setInterval(loadStatus,60000);
+/* ===== procedural Minecraft textures + pixel scene ===== */
+(()=>{let sd=11;const r=()=>(sd=sd*16807%2147483647)/2147483647,pick=a=>a[Math.floor(r()*a.length)];
+const tex=f=>{const c=document.createElement('canvas');c.width=c.height=16;const x=c.getContext('2d');f(x);return c.toDataURL()};
+const P=(x,c,i,j,w=1,h=1)=>{x.fillStyle=c;x.fillRect(i,j,w,h)};
+const noise=(x,p)=>{for(let i=0;i<16;i++)for(let j=0;j<16;j++)P(x,pick(p),i,j)};
+const GR=['#5fa03a','#4f8f30','#6bb044','#468529'],DI=['#7a5232','#6b4527','#8a5e3a','#5e3c20'],ST=['#8a8a8a','#7d7d7d','#999','#6f6f6f'],CR=['#5aa83c','#4e9a33','#68b848'];
+const T={top:tex(x=>noise(x,GR)),dirt:tex(x=>noise(x,DI)),stone:tex(x=>noise(x,ST)),
+side:tex(x=>{noise(x,DI);for(let i=0;i<16;i++){const h=3+(r()<.45?1+Math.floor(r()*3):0);for(let j=0;j<h;j++)P(x,pick(GR),i,j)}}),
+ore:tex(x=>{noise(x,ST);[[3,3],[4,3],[3,4],[10,6],[11,6],[10,7],[5,11],[6,11],[6,12],[12,12],[13,11]].forEach(([i,j],n)=>P(x,n%3?'#2fd8c6':'#b4fff5',i,j))}),
+face:tex(x=>{noise(x,CR);[[2,4,3,3],[11,4,3,3],[6,8,4,3],[5,10,2,4],[9,10,2,4]].forEach(a=>P(x,'#0b140b',...a))}),green:tex(x=>noise(x,CR))};
+const cube=(c,f)=>`<div class="cube ${c}">${f.map((u,i)=>`<div class="f f${i+1}" style="background-image:url(${u})"></div>`).join('')}</div>`;
+const G=[T.side,T.side,T.side,T.side,T.top,T.dirt];
+$('#cubes').innerHTML=cube('c1',G)+cube('c2',[T.ore,T.ore,T.ore,T.ore,T.stone,T.stone])+cube('c3',[T.stone,T.stone,T.stone,T.stone,T.stone,T.stone]);
+$('#st1').innerHTML=cube('c4',[T.ore,T.ore,T.ore,T.ore,T.stone,T.stone]);
+$('#st2').innerHTML=cube('c5',[T.face,T.green,T.green,T.green,T.green,T.green]);
+/* scene */
+const cv=$('#scene'),W=320,H=180,x=cv.getContext('2d');cv.width=W;cv.height=H;
+let g=x.createLinearGradient(0,0,0,H*.7);g.addColorStop(0,'#16233f');g.addColorStop(.55,'#6a5a86');g.addColorStop(1,'#f0a463');x.fillStyle=g;x.fillRect(0,0,W,H);
+g=x.createRadialGradient(238,72,2,238,72,70);g.addColorStop(0,'rgba(255,214,150,.65)');g.addColorStop(1,'rgba(255,214,150,0)');x.fillStyle=g;x.fillRect(0,0,W,H);
+P(x,'#ffe9b0',230,64,16,16);
+x.globalAlpha=.45;[[20,26,40],[110,18,52],[190,34,44],[270,20,36]].forEach(([a,b,w])=>{P(x,'#f6dcc8',a,b,w,4);P(x,'#f6dcc8',a+6,b-4,w-14,4)});x.globalAlpha=1;
+const hills=(c,base,amp,fq,ph)=>{x.fillStyle=c;for(let i=0;i<W;i+=4){let h=base+Math.sin(i*fq+ph)*amp+Math.sin(i*fq*2.3+ph*2)*amp*.5;h=Math.round(h/4)*4;x.fillRect(i,h,4,H-h)}};
+hills('#6a5f8c',100,24,.018,1);hills('#44507a',116,16,.03,3);hills('#2c5a3a',128,8,.045,5);
+const GY=144;for(let i=0;i<W;i++)for(let j=GY;j<H;j++)P(x,j<GY+4?pick(GR):pick(DI),i,j);
+for(let i=0;i<W;i++)P(x,'#2f6a24',i,GY,1,1);
+const tree=(tx,hh)=>{P(x,'#5b3d1e',tx,GY-hh,4,hh);for(let i=-8;i<12;i+=4)for(let j=0;j<12;j+=4){if((j===0&&(i<-4||i>4)))continue;P(x,pick(['#2f7a2a','#276b24','#368a30']),tx+i,GY-hh-8+j,4,4)}};
+[[24,22],[64,18],[118,24],[270,20],[300,16]].forEach(a=>tree(...a));
+g=x.createRadialGradient(200,GY-16,2,200,GY-16,40);g.addColorStop(0,'rgba(170,70,255,.5)');g.addColorStop(1,'rgba(170,70,255,0)');x.fillStyle=g;x.fillRect(150,GY-60,100,80);
+P(x,'#1a0f2e',190,GY-32,6,32);P(x,'#1a0f2e',214,GY-32,6,32);P(x,'#1a0f2e',190,GY-32,30,6);P(x,'#9b3bff',196,GY-26,18,26);P(x,'#c77dff',200,GY-22,4,14);P(x,'#c77dff',206,GY-16,4,10);
+})();
+</script>
+</body>
+</html>
